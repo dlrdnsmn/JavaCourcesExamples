@@ -14,6 +14,7 @@ import kodlamaio.northwind.business.abstracts.ProductService;
 import kodlamaio.northwind.core.utilities.results.DataResult;
 import kodlamaio.northwind.core.utilities.results.Result;
 import kodlamaio.northwind.etities.concretes.Product;
+import kodlamaio.northwind.etities.dtos.ProductWithCategoryDto;
 
 @RestController                                  //Sen bir controllersın.
 @RequestMapping("api/products")                  //requestler ne nedir ?böyle bir site uzantısı ise bu controller karar verecek.
@@ -78,6 +79,12 @@ public class ProductsController {
 	public DataResult<List<Product>> getAllSorted(){
 		return this.productService.getAllSorted();
 	}
-
+	
+	
+	//DTO örnek
+	@GetMapping("/getProductWithCategoryDetails")                      
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails(){
+		return this.productService.getProductWithCategoryDetails();
+	}
 	
 	}

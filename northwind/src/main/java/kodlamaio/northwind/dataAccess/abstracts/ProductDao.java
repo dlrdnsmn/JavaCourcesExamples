@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kodlamaio.northwind.etities.concretes.Product;
+import kodlamaio.northwind.etities.dtos.ProductWithCategoryDto;
 
 //interface interfacesi extend eder.
 //JpaRepository crud,findAll ile filtreleme sıralama,sayfalama yapabiliyoruz.
@@ -32,5 +33,11 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	
 	@Query("From Product where productName=:productName and categoryId=:categoryId")
 	List<Product> GetByNameAndCategory(String productName, int categoryId);
+	
+	//Select p.product_id,p.product_name,c.category_name from category c inner join product p on c.category_id=p.category_id
+	
+	@Query("Select new kodlamaio.northwind.etities.dtos.ProductWithCategoryDto(p.id, p.productName, c.categoryName) "
+			+ "From Category c Inner Join c.products p")                                           //on koşuluna gerek yok
+	List<ProductWithCategoryDto> getProductWithCategoryDetails();
 	
 }
